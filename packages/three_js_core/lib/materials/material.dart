@@ -417,9 +417,9 @@ class Material with EventDispatcher {
   /// Sets the properties based on the `values`.
   void setValueFromString(String key, dynamic newValue) {
     if (key == "alphaTest") {
-      alphaTest = newValue.toDouble();
+      alphaTest = (newValue as num).toDouble();
     } else if (key == "bumpScale") {
-      bumpScale = newValue.toDouble();
+      bumpScale = (newValue as num).toDouble();
     } else if (key == "alphaMap") {
       alphaMap = newValue;
     } else if (key == "aoMap") {
@@ -439,9 +439,9 @@ class Material with EventDispatcher {
     } else if (key == "blendSrcAlpha") {
       blendSrcAlpha = newValue;
     } else if (key == "clearcoat") {
-      clearcoat = newValue.toDouble();
+      clearcoat = (newValue as num).toDouble();
     } else if (key == "clearcoatRoughness") {
-      clearcoatRoughness = newValue.toDouble();
+      clearcoatRoughness = (newValue as num).toDouble();
     } else if (key == "clipIntersection") {
       clipIntersection = newValue;
     } else if (key == "clipping") {
@@ -497,13 +497,13 @@ class Material with EventDispatcher {
     } else if (key == "linejoin") {
       linejoin = newValue;
     } else if (key == "linewidth") {
-      linewidth = newValue.toDouble();
+      linewidth = (newValue as num).toDouble();
     } else if (key == "matcap") {
       matcap = newValue;
     } else if (key == "map") {
       map = newValue;
     } else if (key == "metalness") {
-      metalness = newValue.toDouble();
+      metalness = (newValue as num).toDouble();
     } else if (key == "metalnessMap") {
       metalnessMap = newValue;
     } else if (key == "name") {
@@ -513,21 +513,21 @@ class Material with EventDispatcher {
     } else if (key == "normalScale") {
       normalScale = newValue;
     } else if (key == "opacity") {
-      opacity = newValue.toDouble();
+      opacity = (newValue as num).toDouble();
     } else if (key == "polygonOffset") {
       polygonOffset = newValue;
     } else if (key == "polygonOffsetFactor") {
-      polygonOffsetFactor = newValue.toDouble();
+      polygonOffsetFactor = (newValue as num).toDouble();
     } else if (key == "polygonOffsetUnits") {
-      polygonOffsetUnits = newValue.toDouble();
+      polygonOffsetUnits = (newValue as num).toDouble();
     } else if (key == "premultipliedAlpha") {
       premultipliedAlpha = newValue;
     } else if (key == "reflectivity") {
-      reflectivity = newValue.toDouble();
+      reflectivity = (newValue as num).toDouble();
     } else if (key == "roughness") {
-      roughness = newValue.toDouble();
+      roughness = (newValue as num).toDouble();
     }else if (key == "refractionRatio") {
-      refractionRatio = newValue.toDouble();
+      refractionRatio = (newValue as num).toDouble();
     }else if (key == "roughnessMap") {
       roughnessMap = newValue;
     } 
@@ -539,17 +539,17 @@ class Material with EventDispatcher {
       //   this.flatShading = ( newValue == FlatShading ) ? true : false;
 
     } else if (key == "shininess") {
-      shininess = newValue.toDouble();
+      shininess = (newValue as num).toDouble();
     } else if (key == "side") {
       side = newValue;
     } else if (key == "size") {
-      size = newValue.toDouble();
+      size = (newValue as num).toDouble();
     } else if (key == "dashSize") {
-      dashSize = newValue.toDouble();
+      dashSize = (newValue as num).toDouble();
     } else if (key == "gapSize") {
-      gapSize = newValue.toDouble();
+      gapSize = (newValue as num).toDouble();
     } else if (key == "scale") {
-      scale = newValue.toDouble();
+      scale = (newValue as num).toDouble();
     } else if (key == "sizeAttenuation") {
       sizeAttenuation = newValue;
     } else if (key == "stencilZFail") {
@@ -579,41 +579,33 @@ class Material with EventDispatcher {
     } else if (key == "wireframe") {
       wireframe = newValue;
     } else if (key == "wireframeLinewidth") {
-      wireframeLinewidth = newValue.toDouble();
+      wireframeLinewidth = (newValue as num).toDouble();
     } else if (key == "shadowSide") {
       shadowSide = newValue;
     }
     else if(key == "aoMapIntensity" ){
-      aoMapIntensity = newValue*1.0;
+      aoMapIntensity = (newValue as num).toDouble();
     }
     else if(key == "bumpMap"){
       bumpMap = newValue;
     }
     else if (key == "envMap") {
       envMap = newValue;
-    }
-    else if (key == "envMapIntensity") {
-      envMapIntensity = newValue.toDouble();
-    }
-    else if (key == "transmission") {
-      transmission = newValue.toDouble();
-    }
-    else if (key == "thickness") {
-      thickness = newValue;
-    }
-    else if (key == "attenuationDistance") {
-      attenuationDistance = newValue;
-    }
-    else if (key == "ior") {
-      ior = newValue;
-    }
-    else if(key == 'thicknessMap'){
+    } else if (key == "envMapIntensity") {
+      envMapIntensity = (newValue as num).toDouble();
+    } else if (key == "transmission") {
+      transmission = (newValue as num).toDouble();
+    } else if (key == "thickness") {
+      thickness = (newValue as num).toDouble();
+    } else if (key == "attenuationDistance") {
+      attenuationDistance = (newValue as num).toDouble();
+    } else if (key == "ior") {
+      ior = (newValue as num).toDouble();
+    } else if (key == 'thicknessMap') {
       thicknessMap = newValue;
-    }
-    else if(key == 'specularIntensity'){
-      specularIntensity = newValue;
-    }
-    else if(key == 'attenuationColor'){
+    } else if (key == 'specularIntensity') {
+      specularIntensity = (newValue as num).toDouble();
+    } else if (key == 'attenuationColor') {
       if (newValue is Color) {
         attenuationColor = newValue;
       } else {
@@ -640,10 +632,10 @@ class Material with EventDispatcher {
 
     }
     else if (key == 'displacementScale') {
-      displacementScale = newValue.toDouble();
+      displacementScale = (newValue as num).toDouble();
     }
     else if (key == 'emissiveIntensity') {
-      emissiveIntensity = newValue.toDouble();
+      emissiveIntensity = (newValue as num).toDouble();
     }
     else {
       console.error("Material.setValues key: $key newValue: $newValue is not support");
