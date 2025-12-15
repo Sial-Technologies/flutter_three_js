@@ -133,7 +133,6 @@ class Object3D with EventDispatcher {
     }
     type = json["type"];
     layers.mask = json["layers"];
-
     position = Vector3(json["position"][0],json["position"][1],json["position"][2]);
     quaternion = Quaternion(json["quaternion"][0],json["quaternion"][1],json["quaternion"][2],json["quaternion"][3]);
     scale = Vector3(json["scale"][0],json["scale"][1],json["scale"][2]);
@@ -673,10 +672,8 @@ class Object3D with EventDispatcher {
   /// Note: Modifying the scene graph inside the callback is discouraged.
   void traverseAncestors(Function(Object3D?) callback) {
     final parent = this.parent;
-
     if (parent != null) {
       callback(parent);
-
       parent.traverseAncestors(callback);
     }
   }
@@ -1055,16 +1052,25 @@ class Object3D with EventDispatcher {
     }
   }
 
-  dynamic getProperty(String propertyName) {
+  dynamic getProperty(String propertyName, [int? offset]) {
     if (propertyName == "id") {
       return id;
     } else if (propertyName == "name") {
       return name;
     } else if (propertyName == "scale") {
+      if(offset != null){
+        return scale[offset];
+      }
       return scale;
     } else if (propertyName == "position") {
+      if(offset != null){
+        return position[offset];
+      }
       return position;
     } else if (propertyName == "quaternion") {
+      if(offset != null){
+        return quaternion[offset];
+      }
       return quaternion;
     } else if (propertyName == "material") {
       return material;
@@ -1121,6 +1127,9 @@ class Object3D with EventDispatcher {
     }else if(propertyName == 'position'){
       return position;
     }else if(propertyName == 'rotation'){
+      if(offset != null){
+        return rotation[offset];
+      }
       return rotation;
     }else if(propertyName == 'quaternion'){
       return quaternion;
@@ -1164,17 +1173,32 @@ class Object3D with EventDispatcher {
     return null;
   }
 
-  Object3D setProperty(String propertyName, dynamic newValue) {
+  Object3D setProperty(String propertyName, dynamic newValue, [int? offset]) {
     if (propertyName == "id") {
       id = newValue;
     } else if (propertyName == "name") {
       name = newValue;
     } else if (propertyName == "scale") {
-      scale = newValue;
+      if(newValue is Vector3){
+        scale = newValue;
+      }
+      else if(newValue is num){
+        scale.setValues(newValue.toDouble(),newValue.toDouble(),newValue.toDouble());
+      }
     } else if (propertyName == "position") {
-      position = newValue;
+      if(newValue is Vector3){
+        position = newValue;
+      }
+      else if(offset != null){
+        position[offset] = newValue;
+      }
     } else if (propertyName == "quaternion") {
-      quaternion = newValue;
+      if(offset != null){
+        quaternion[offset] = newValue;
+      }
+      else{
+        quaternion = newValue;
+      }
     } else if (propertyName == "material") {
       material = newValue;
     } else if (propertyName == "morphTargetInfluences") {
@@ -1227,22 +1251,17 @@ class Object3D with EventDispatcher {
       geometry = newValue;
     }else if(propertyName == 'up'){
       up = newValue;
-    }else if(propertyName == 'position'){
-      position = newValue;
     }else if(propertyName == 'rotation'){
-      rotation = newValue;
-    }else if(propertyName == 'quaternion'){
-      quaternion = newValue;
-    }else if(propertyName == 'scale'){
-      scale = newValue;
+      if(offset != null){
+        rotation[offset] = newValue;
+      }
+      else{
+        rotation = newValue;
+      }
     }else if(propertyName == 'modelViewMatrix'){
       modelViewMatrix = newValue;
     }else if(propertyName == 'normalMatrix'){
       normalMatrix = newValue;
-    }else if(propertyName == 'material'){
-      material = newValue;
-    }else if(propertyName == 'morphTargetInfluences'){
-      morphTargetInfluences = newValue;
     }else if(propertyName == 'morphTargetDictionary'){
       morphTargetDictionary = newValue;
     }else if(propertyName == 'count'){
