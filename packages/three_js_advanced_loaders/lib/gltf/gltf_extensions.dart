@@ -256,7 +256,7 @@ class GLTFLightsExtension extends GLTFExtension {
       List<double> listDouble = listDyn.map(
         (i){
           if(i is int){
-            return i.toDouble();
+            return (i as num).toDouble();
           }
           else{
             return double.tryParse(i) ?? 1;
@@ -343,7 +343,7 @@ class GLTFMaterialsUnlitExtension extends GLTFExtension {
 
     if (metallicRoughness != null) {
       if (metallicRoughness["baseColorFactor"] is List) {
-        List<double> array = List<double>.from(metallicRoughness["baseColorFactor"].map((e) => e.toDouble()).toList());
+        List<double> array = List<double>.from(metallicRoughness["baseColorFactor"].map((e) => (e as num).toDouble()).toList());
 
         materialParams["color"].fromArray(array);
         materialParams["opacity"] = array[3];
@@ -466,7 +466,7 @@ class GLTFMaterialsSheenExtension extends GLTFExtension {
       Map extension = materialDef["extensions"][name];
 
       if (extension["sheenColorFactor"] != null) {
-        final colorFactor = List<double>.from(extension['sheenColorFactor'].map((e) => e.toDouble()));
+        final colorFactor = List<double>.from(extension['sheenColorFactor'].map((e) => (e as num).toDouble()));
 			  materialParams['sheenColor'].setRGB( colorFactor[ 0 ], colorFactor[ 1 ], colorFactor[ 2 ]);
       }
 
@@ -919,8 +919,10 @@ class GLTFTextureTransformExtension extends GLTFExtension {
   Texture extendTexture(Texture texture, Map<String,dynamic> transform) {
     texture = texture.clone();
 
-    if (transform.containsKey("offset")) {
-      final offset = (transform["offset"] as List?)?.map((item) => item as double).toList();
+   if (transform.containsKey("offset")) {
+      final offset = (transform["offset"] as List?)
+          ?.map((item) => (item as num).toDouble())
+          .toList();
       if (offset != null) {
         texture.offset.copyFromArray(offset);
       }
@@ -931,7 +933,9 @@ class GLTFTextureTransformExtension extends GLTFExtension {
     }
 
     if (transform.containsKey("scale")) {
-      final scale = (transform["scale"] as List?)?.map((item) => item as double).toList();
+      final scale = (transform["scale"] as List?)
+          ?.map((item) => (item as num).toDouble())
+          .toList();
       if (scale != null) {
         texture.repeat.copyFromArray(scale);
       }
